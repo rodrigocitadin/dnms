@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: dnms-postgres
+    environment:
+      POSTGRES_DB: dnms
+      POSTGRES_USER: dnms
+      POSTGRES_PASSWORD: dnms
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - dnms_network
+
+networks:
+  dnms_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
